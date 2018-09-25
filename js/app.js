@@ -94,7 +94,6 @@ function showNewItems(){
     productTwo.removeEventListener('click', showNewItems);
     productThree.removeEventListener('click', showNewItems);
     document.getElementById('busMallBox').style.display = 'none';
-    renderResults();
   }
 }
 //why won't you work??
@@ -112,3 +111,5 @@ function renderResults(){
 productOne.addEventListener('click', showNewItems);
 productTwo.addEventListener('click', showNewItems);
 productThree.addEventListener('click', showNewItems);
+
+renderResults();
