@@ -36,7 +36,7 @@ function BusMall(filepath, itemName){
   allItems.push(this);
 }
 
-new BusMall('..img/bag.jpg', 'bag');
+new BusMall('../img/bag.jpg', 'bag');
 new BusMall('../img/banana.jpg', 'banana');
 new BusMall('../img/bathroom.jpg', 'bathroom');
 new BusMall('../img/boots.jpg', 'boots');
@@ -52,7 +52,7 @@ new BusMall('../img/scissors.jpg', 'scissors');
 new BusMall('../img/shark.jpg', 'shark');
 new BusMall('../img/sweep.png', 'sweep'); //check for any png issues
 new BusMall('../img/tauntaun.jpg', 'tauntaun');
-new BusMall('..img/unicorn.jpg', 'unicorn');
+new BusMall('../img/unicorn.jpg', 'unicorn');
 new BusMall('../img/usb.gif', 'usb'); //check for GIF issues
 new BusMall('../img/waterCan.jpg', 'water-can');
 new BusMall('../img/wineGlass.jpg', 'wine-glass');
@@ -89,16 +89,19 @@ function showNewItems(){
   renderItems();
   numClicks++;
   numClicksTotal.innerText = numClicks;
-  if (numClicks === 25){
-    productOne.removeEventListener('click', showNewItems);
-    productTwo.removeEventListener('click', showNewItems);
-    productThree.removeEventListener('click', showNewItems);
-    document.getElementById('busMallBox').style.display = 'none';
-  }
 }
+if (numClicks === 4){
+  productOne.removeEventListener('click', showNewItems);
+  productTwo.removeEventListener('click', showNewItems);
+  productThree.removeEventListener('click', showNewItems);
+  document.getElementById('busMallBox').style.display = 'none';
+  renderResults();
+}
+
+
 //why won't you work??
 function renderResults(){
-  var dataResults = document.getElementById('dataReults');
+  var dataResults = document.getElementById('dataResults');
   var newUl = document.createElement('ul');
   for (var i = 0; i < allItems.length; i++){
     var newLi = document.createElement('li');
@@ -112,4 +115,3 @@ productOne.addEventListener('click', showNewItems);
 productTwo.addEventListener('click', showNewItems);
 productThree.addEventListener('click', showNewItems);
 
-renderResults();
