@@ -19,11 +19,11 @@
 //call the function
 
 //DOM
+var allItems = [];
 var productOne = document.getElementById('productOne');
 var productTwo = document.getElementById('productTwo');
 var productThree = document.getElementById('productThree');
 
-var allItems = [];
 var numClicks = 0;
 var numClicksTotal = document.getElementById('numberCompleted');
 var endItem = [];
@@ -80,7 +80,6 @@ function renderItems(){
 renderItems();
 
 function showNewItems(){
-  event.preventDefault();
   var clickedItem = event.target;
   allItems[clickedItem.id].timesClicked++;
   allItems[productOne.id].timesShown++;
@@ -89,23 +88,21 @@ function showNewItems(){
   renderItems();
   numClicks++;
   numClicksTotal.innerText = numClicks;
-}
-if (numClicks === 4){
-  productOne.removeEventListener('click', showNewItems);
-  productTwo.removeEventListener('click', showNewItems);
-  productThree.removeEventListener('click', showNewItems);
-  document.getElementById('busMallBox').style.display = 'none';
-  renderResults();
+  if (numClicks === 25){
+    renderResults();
+    productOne.removeEventListener('click', showNewItems);
+    productTwo.removeEventListener('click', showNewItems);
+    productThree.removeEventListener('click', showNewItems);
+    document.getElementById('busMallBox').style.display = 'none';
+  }
 }
 
-
-//why won't you work??
 function renderResults(){
   var dataResults = document.getElementById('dataResults');
   var newUl = document.createElement('ul');
   for (var i = 0; i < allItems.length; i++){
     var newLi = document.createElement('li');
-    newLi.innerText = allItems[i].timesClicked + ' votes for ' + allItems[i].itemName + '.  Total times shown: ' + allItems[i].timesShown + '.';
+    newLi.innerText = allItems[i].timesClicked + ' votes for ' + allItems[i].itemName + '.' + 'Total times shown: ' + allItems[i].timesShown + '.';
     newUl.appendChild(newLi);
   }
   dataResults.appendChild(newUl);
