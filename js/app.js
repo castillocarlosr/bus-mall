@@ -1,24 +1,5 @@
 'use strict';
 
-// Display three products side-by-side-by-side
-// User chooses one.
-//     Store data.  Calculate and display results.
-//     Results = total # clicks, % of times an item clicked when shown.
-//     Keep track of how many times each image is displayed.  Do calculations.
-// Show results at end of 25 selections.
-
-
-//var array of bus items
-//Call event handler
-//  Action on click  Event listener
-//  array to store data clicked
-//  array on what is shown
-// get DOM of ID image
-// need a items object
-// need a constructor function
-//call the function
-
-//DOM
 var allItems = [];
 var productOne = document.getElementById('productOne');
 var productTwo = document.getElementById('productTwo');
@@ -27,7 +8,7 @@ var productThree = document.getElementById('productThree');
 var numClicks = 0;
 var numClicksTotal = document.getElementById('numberCompleted');
 var endItem = [];
-//unction BusMall(filepath, itemName)
+
 function BusMall(filepath, itemName){
   this.filepath = filepath;
   this.itemName = itemName;
@@ -79,6 +60,8 @@ function renderItems(){
 }
 renderItems();
 
+
+
 function showNewItems(){
   var clickedItem = event.target;
   allItems[clickedItem.id].timesClicked++;
@@ -88,27 +71,83 @@ function showNewItems(){
   renderItems();
   numClicks++;
   numClicksTotal.innerText = numClicks;
-  if (numClicks === 25){
-    renderResults();
+  if (numClicks === 7){
+    //renderResults();
     productOne.removeEventListener('click', showNewItems);
     productTwo.removeEventListener('click', showNewItems);
     productThree.removeEventListener('click', showNewItems);
-    document.getElementById('busMallBox').style.display = 'none';
+    //document.getElementById('busMallBox').style.display = 'none';
+    showChart();
   }
 }
 
-function renderResults(){
-  var dataResults = document.getElementById('dataResults');
-  var newUl = document.createElement('ul');
-  for (var i = 0; i < allItems.length; i++){
-    var newLi = document.createElement('li');
-    newLi.innerText = allItems[i].timesClicked + ' votes for ' + allItems[i].itemName + '.' + 'Total times shown: ' + allItems[i].timesShown + '.';
-    newUl.appendChild(newLi);
-  }
-  dataResults.appendChild(newUl);
-}
+// function renderResults(){
+//   var dataResults = document.getElementById('dataResults');
+//   var newUl = document.createElement('ul');
+//   for (var i = 0; i < allItems.length; i++){
+//     var newLi = document.createElement('li');
+//     newLi.innerText = allItems[i].timesClicked + ' votes for ' + allItems[i].itemName + '.' + 'Total times shown: ' + allItems[i].timesShown + '.';
+//     //newLi.innerText = allItems[i].timesClicked + allItems[i].itemName + allItems[i].timesShown;
+//     newUl.appendChild(newLi);
+//   }
+//   dataResults.appendChild(newUl);
+// }
 
 productOne.addEventListener('click', showNewItems);
 productTwo.addEventListener('click', showNewItems);
 productThree.addEventListener('click', showNewItems);
+
+//*********Below this line is the new chart material********************
+
+
+function showChart(){
+  var labels = [];
+  var voteData = [];
+  var colors = [];
+
+  for (var i = 0; i < allItems.length; i++){
+    allItems[i].pct = Math.round((allItems[i].timesClicked / allItems[i].timesShown) * 100);
+  }
+
+  allItems.sort(function(a,b){
+    return b.pct - a.pct;
+  });
+
+  for ( i = 0; i < allItems.length; i++){
+    labels.push(allItems[i].itemName);
+    voteData.push(allItems[i].pct);
+
+    var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    colors.push(randomColor);
+  }
+  //look from here******
+  var context = document.getElementById('chartBar').getContext('2d');
+  new Chart(context, {
+    type: 'horizontalBar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Popularity (% of clicks)',
+          data: voteData,
+          backgroundColor: colors,
+        },
+      ],
+    },
+    options: {
+      responsive: false,
+      maintainAspectRatio: true,
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    },
+  });
+}
+
 
