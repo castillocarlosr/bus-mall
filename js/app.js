@@ -19,39 +19,96 @@
 //call the function
 
 //DOM
-var imgElement = document.getElementById('bag');
-var imgElement = document.getElementById('banana');
-var imgElement = document.getElementById('bathroom');
+var productOne = document.getElementById('productOne');
+var productTwo = document.getElementById('productTwo');
+var productThree = document.getElementById('productThree');
 
-//array of catalog
-var Busmall.catalog = [];
-
-//constructor
-function Busmall(filepath1, filepath2, filepath3, itemName1, itemName2, itemName3){
-    this.filepath1 = filepath1;
-    this.filepath2 = filepath2;
-    this.filepath3 = filepath3;
-    this.itemName1 = itemName1;
-    this.itemName2 = itemName2;
-    this.itemName3 = itemName3;
-    Busmall.catalog.push(this);
+var allItems = [];
+var numClicks = 0;
+var numClicksTotal = document.getElementById('numberCompleted');
+var endItem = [];
+//unction BusMall(filepath, itemName)
+function BusMall(filepath, itemName){
+  this.filepath = filepath;
+  this.itemName = itemName;
+  this.timesClicked = 0;
+  this.timesShown = 0;
+  allItems.push(this);
 }
 
-//event handler
-function randomItem(){
-    var randomNumber = Math.floor(Math.random() * Busmall.catalog.length);
-    imgElement.src = Busmall.catalog[randomNumber].filepath1;
-    imgElement.alt = Busmall.catalog[randomNumber].itemName1;
-    imgElement.src = Busmall.catalog[randomNumber].filepath2;
-    imgElement.alt = Busmall.catalog[randomNumber].itemName2;
-    imgElement.src = Busmall.catalog[randomNumber].filepath3;
-    imgElement.alt = Busmall.catalog[randomNumber].itemName3;
+new BusMall('..img/bag.jpg', 'bag');
+new BusMall('../img/banana.jpg', 'banana');
+new BusMall('../img/bathroom.jpg', 'bathroom');
+new BusMall('../img/boots.jpg', 'boots');
+new BusMall('../img/breakfast.jpg', 'breakfast');
+new BusMall('../img/bubblegum.jpg', 'bubblegum');
+new BusMall('../img/chair.jpg', 'chair');
+new BusMall('../img/cthulhu.jpg', 'cthulhu');
+new BusMall('../img/dogDuck.jpg', 'dog-duck');
+new BusMall('../img/dragon.jpg', 'dragon');
+new BusMall('../img/pen.jpg', 'pen');
+new BusMall('../img/petSweep.jpg', 'pet-sweep');
+new BusMall('../img/scissors.jpg', 'scissors');
+new BusMall('../img/shark.jpg', 'shark');
+new BusMall('../img/sweep.png', 'sweep'); //check for any png issues
+new BusMall('../img/tauntaun.jpg', 'tauntaun');
+new BusMall('..img/unicorn.jpg', 'unicorn');
+new BusMall('../img/usb.gif', 'usb'); //check for GIF issues
+new BusMall('../img/waterCan.jpg', 'water-can');
+new BusMall('../img/wineGlass.jpg', 'wine-glass');
+
+function randomNumber(){
+  return Math.floor(Math.random() * allItems.length);
 }
 
-imgElement.addEventListener('click', randomItem)
+function renderItems(){
+  var newItems = [];
+  while (newItems.length < 3){
+    var randItem = randomNumber();
+    if (!endItem.includes(randItem) && !newItems.includes(randItem)){
+      newItems.push(randItem);
+    }
+  }
+  productOne.src = allItems[newItems[0]].filepath;
+  productOne.id = newItems[0];
+  productTwo.src = allItems[newItems[1]].filepath;
+  productTwo.id = newItems[1];
+  productThree.src = allItems[newItems[2]].filepath;
+  productThree.id = newItems[2];
+  endItem = newItems;
+}
+renderItems();
 
-new Busmall('../img/bag.jpg', '../img/banana.jpg', '../img/bathroom.jpg', 'bag', 'banana', 'bathroom');
-new Busmall('../img/boots.jpg', '../img/breakfast.jpg', '../img/bubblegum.jpg', 'boots', 'breakfast', 'bubblegum');
-new Busmall('../img/chair.jpg', '../img/cthulhu.jpg', '../img/dog-duck.jpg', 'chair', 'cthulhu', 'dog-duck');
+function showNewItems(){
+  event.preventDefault();
+  var clickedItem = event.target;
+  allItems[clickedItem.id].timesClicked++;
+  allItems[productOne.id].timesShown++;
+  allItems[productTwo.id].timesShown++;
+  allItems[productThree.id].timesShown++;
+  renderItems();
+  numClicks++;
+  numClicksTotal.innerText = numClicks;
+  if (numClicks === 25){
+    productOne.removeEventListener('click', showNewItems);
+    productTwo.removeEventListener('click', showNewItems);
+    productThree.removeEventListener('click', showNewItems);
+    document.getElementById('busMallBox').style.display = 'none';
+    renderResults();
+  }
+}
+//why won't you work??
+function renderResults(){
+  var dataResults = document.getElementById('dataReults');
+  var newUl = document.createElement('ul');
+  for (var i = 0; i < allItems.length; i++){
+    var newLi = document.createElement('li');
+    newLi.innerText = allItems[i].timesClicked + ' votes for ' + allItems[i].itemName + '.  Total times shown: ' + allItems[i].timesShown + '.';
+    newUl.appendChild(newLi);
+  }
+  dataResults.appendChild(newUl);
+}
 
-randomItem();
+productOne.addEventListener('click', showNewItems);
+productTwo.addEventListener('click', showNewItems);
+productThree.addEventListener('click', showNewItems);
