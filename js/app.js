@@ -80,13 +80,13 @@ function showNewItems(){
   allItems[productThree.id].timesShown++;
   renderItems();
   numClicks++;
-  numClicksTotal.innerText = numClicks;
-  if (numClicks === 7){
+  numClicksTotal.innerText = numClicks + ' times you have clicked.';
+  if (numClicks === 25){
     //renderResults();
     productOne.removeEventListener('click', showNewItems);
     productTwo.removeEventListener('click', showNewItems);
     productThree.removeEventListener('click', showNewItems);
-    //document.getElementById('busMallBox').style.display = 'none';
+    document.getElementById('busMallBox').style.display = 'none';
     showChart();
 
     localStorage.setItem('resultsStorage1', JSON.stringify(allItems));
@@ -143,6 +143,7 @@ function showChart(){
           label: 'Popularity (% of clicks)',
           data: voteData,
           backgroundColor: colors,
+          borderWidth: 4
         },
       ],
     },
@@ -154,6 +155,7 @@ function showChart(){
           {
             ticks: {
               beginAtZero: true,
+              fontColor: 'black'
             },
           },
         ],
@@ -161,5 +163,5 @@ function showChart(){
     },
   });
 }
-
+Chart.defaults.global.defaultFontColor='black';
 
