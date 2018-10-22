@@ -20,26 +20,26 @@ function BusMall(filepath, itemName){
 var resultsStorage = localStorage.getItem('resultsStorage1');
 
 if(!resultsStorage){
-  new BusMall('../img/bag.jpg', 'bag');
-  new BusMall('../img/banana.jpg', 'banana');
-  new BusMall('../img/bathroom.jpg', 'bathroom');
-  new BusMall('../img/boots.jpg', 'boots');
-  new BusMall('../img/breakfast.jpg', 'breakfast');
-  new BusMall('../img/bubblegum.jpg', 'bubblegum');
-  new BusMall('../img/chair.jpg', 'chair');
-  new BusMall('../img/cthulhu.jpg', 'cthulhu');
-  new BusMall('../img/dogDuck.jpg', 'dog-duck');
-  new BusMall('../img/dragon.jpg', 'dragon');
-  new BusMall('../img/pen.jpg', 'pen');
-  new BusMall('../img/petSweep.jpg', 'pet-sweep');
-  new BusMall('../img/scissors.jpg', 'scissors');
-  new BusMall('../img/shark.jpg', 'shark');
-  new BusMall('../img/sweep.png', 'sweep'); //check for any png issues
-  new BusMall('../img/tauntaun.jpg', 'tauntaun');
-  new BusMall('../img/unicorn.jpg', 'unicorn');
-  new BusMall('../img/usb.gif', 'usb'); //check for GIF issues
-  new BusMall('../img/waterCan.jpg', 'water-can');
-  new BusMall('../img/wineGlass.jpg', 'wine-glass');
+  new BusMall('..img/bag.jpg', 'bag');
+  new BusMall('..img/banana.jpg', 'banana');
+  new BusMall('..img/bathroom.jpg', 'bathroom');
+  new BusMall('..img/boots.jpg', 'boots');
+  new BusMall('..img/breakfast.jpg', 'breakfast');
+  new BusMall('..img/bubblegum.jpg', 'bubblegum');
+  new BusMall('..img/chair.jpg', 'chair');
+  new BusMall('..img/cthulhu.jpg', 'cthulhu');
+  new BusMall('..img/dogDuck.jpg', 'dog-duck');
+  new BusMall('..img/dragon.jpg', 'dragon');
+  new BusMall('..img/pen.jpg', 'pen');
+  new BusMall('..img/petSweep.jpg', 'pet-sweep');
+  new BusMall('..img/scissors.jpg', 'scissors');
+  new BusMall('..img/shark.jpg', 'shark');
+  new BusMall('..img/sweep.png', 'sweep'); //check for any png issues
+  new BusMall('..img/tauntaun.jpg', 'tauntaun');
+  new BusMall('..img/unicorn.jpg', 'unicorn');
+  new BusMall('..img/usb.gif', 'usb'); //check for GIF issues
+  new BusMall('..img/waterCan.jpg', 'water-can');
+  new BusMall('..img/wineGlass.jpg', 'wine-glass');
 
   //localStorage.setItem('resultsStorage1', JSON.stringify(allItems));
 }
