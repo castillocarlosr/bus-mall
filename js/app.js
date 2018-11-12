@@ -34,20 +34,18 @@ if(!resultsStorage){
   new BusMall('..img/petSweep.jpg', 'pet-sweep');
   new BusMall('..img/scissors.jpg', 'scissors');
   new BusMall('..img/shark.jpg', 'shark');
-  new BusMall('..img/sweep.png', 'sweep'); //check for any png issues
+  new BusMall('..img/sweep.png', 'sweep'); 
   new BusMall('..img/tauntaun.jpg', 'tauntaun');
   new BusMall('..img/unicorn.jpg', 'unicorn');
-  new BusMall('..img/usb.gif', 'usb'); //check for GIF issues
+  new BusMall('..img/usb.gif', 'usb'); 
   new BusMall('..img/waterCan.jpg', 'water-can');
   new BusMall('..img/wineGlass.jpg', 'wine-glass');
-
-  //localStorage.setItem('resultsStorage1', JSON.stringify(allItems));
 }
 else{
   allItems = JSON.parse(resultsStorage);
 }
 
-
+////**** Random number generator */
 function randomNumber(){
   return Math.floor(Math.random() * allItems.length);
 }
@@ -71,7 +69,7 @@ function renderItems(){
 renderItems();
 
 
-
+////****Shows new item and updates count by 1 */
 function showNewItems(){
   var clickedItem = event.target;
   allItems[clickedItem.id].timesClicked++;
@@ -92,18 +90,6 @@ function showNewItems(){
     localStorage.setItem('resultsStorage1', JSON.stringify(allItems));
   }
 }
-
-// function renderResults(){
-//   var dataResults = document.getElementById('dataResults');
-//   var newUl = document.createElement('ul');
-//   for (var i = 0; i < allItems.length; i++){
-//     var newLi = document.createElement('li');
-//     newLi.innerText = allItems[i].timesClicked + ' votes for ' + allItems[i].itemName + '.' + 'Total times shown: ' + allItems[i].timesShown + '.';
-//     //newLi.innerText = allItems[i].timesClicked + allItems[i].itemName + allItems[i].timesShown;
-//     newUl.appendChild(newLi);
-//   }
-//   dataResults.appendChild(newUl);
-// }
 
 productOne.addEventListener('click', showNewItems);
 productTwo.addEventListener('click', showNewItems);
