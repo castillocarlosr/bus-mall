@@ -20,9 +20,9 @@ function BusMall(filepath, itemName){
 var resultsStorage = localStorage.getItem('resultsStorage1');
 
 if(!resultsStorage){
-  new BusMall('/../img/bag.jpg', 'bag');
-  new BusMall('./../img/banana.jpg', 'banana');
-  new BusMall('../../img/bathroom.jpg', 'bathroom');
+  new BusMall('../img/bag.jpg', 'bag');
+  new BusMall('../img/banana.jpg', 'banana');
+  new BusMall('../img/bathroom.jpg', 'bathroom');
   new BusMall('../img/boots.jpg', 'boots');
   new BusMall('../img/breakfast.jpg', 'breakfast');
   new BusMall('../img/bubblegum.jpg', 'bubblegum');
@@ -53,7 +53,7 @@ function randomNumber(){
 function renderItems(){
   var newItems = [];
   while (newItems.length < 3){
-    var randItem = randomNumber();
+    let randItem = randomNumber();
     if (!endItem.includes(randItem) && !newItems.includes(randItem)){
       newItems.push(randItem);
     }
@@ -66,7 +66,6 @@ function renderItems(){
   productThree.id = newItems[2];
   endItem = newItems;
 }
-renderItems();
 
 
 ////****Shows new item and updates count by 1 */
@@ -86,10 +85,12 @@ function showNewItems(){
     productThree.removeEventListener('click', showNewItems);
     document.getElementById('busMallBox').style.display = 'none';
     showChart();
-
+    
     localStorage.setItem('resultsStorage1', JSON.stringify(allItems));
   }
 }
+
+renderItems();
 
 productOne.addEventListener('click', showNewItems);
 productTwo.addEventListener('click', showNewItems);
