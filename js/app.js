@@ -64,7 +64,7 @@ function renderItems(){
   productTwo.id = newItems[1];
   productThree.src = allItems[newItems[2]].filepath;
   productThree.id = newItems[2];
-  endItem = newItems;
+  endItem.push(newItems);
 }
 
 
